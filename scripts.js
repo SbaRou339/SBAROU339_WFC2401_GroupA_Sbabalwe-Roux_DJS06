@@ -15,9 +15,6 @@ const products = [
 ]
 
 // ForEach Basics
-names.forEach(name => console.log(name));
-provinces.forEach(province => console.log(province));
-
 names.forEach((name, index) => {
   console.log(`${name} (${provinces[index]})`);
 });
@@ -33,3 +30,11 @@ console.log(nameLengths);
 // Sorting
 const sortedProvinces = [...provinces].sort();
 console.log(sortedProvinces);
+
+// Filtering basics
+const filteredProvinces = provinces.filter(province => !province.includes('Cape'));
+console.log(filteredProvinces.length);
+
+// Finding 'S'
+const containsS = names.map(name => name.includes('S') || name.includes('s'));
+console.log(containsS);
