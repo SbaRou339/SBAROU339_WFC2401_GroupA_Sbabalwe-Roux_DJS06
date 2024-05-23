@@ -26,3 +26,10 @@ names.forEach((name, index) => {
 const upperCaseProvinces = provinces.map(province => province.toUpperCase());
 console.log(upperCaseProvinces);
 
+// Name Lengths
+const nameLengths = names.map(name => name.length);
+console.log(nameLengths);
+
+// Sorting
+const sortedProvinces = [...provinces].sort();
+console.log(sortedProvinces);
