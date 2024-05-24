@@ -64,3 +64,27 @@ console.log(
 
 // Concatenate Product Names
 console.log(products.reduce((acc, product) => acc + product.product + ' ', '').trim());
+
+// Find Extremes in Prices
+console.log(
+  products
+    .filter(product => product.price.trim() !== '')
+    .map(product => Number(product.price))
+    .reduce((acc, price) => {
+      if (price > acc.highest) acc.highest = price;
+      if (price < acc.lowest) acc.lowest = price;
+      return acc;
+    }, { highest: -Infinity, lowest: Infinity })
+    |> ({ highest, lowest }) => `Highest: ${highest}. Lowest: ${lowest}.`
+);
+
+
+// Object Transformation
+console.log(
+  Object.entries(products.reduce((acc, { product, price }) => {
+    acc[product] = { name: product, cost: price };
+    return acc;
+  }, {}))
+);
+
+
