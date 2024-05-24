@@ -53,3 +53,14 @@ console.log(products.forEach(product => console.log(product.product)));
 
 // Filter by Name length
 console.log(products.filter(product => product.product.length <= 5));
+
+// Price Manipulation
+console.log(
+  products
+    .filter(product => product.price.trim() !== '')
+    .map(product => ({ ...product, price: Number(product.price) }))
+    .reduce((total, product) => total + product.price, 0)
+);
+
+// Concatenate Product Names
+console.log(products.reduce((acc, product) => acc + product.product + ' ', '').trim());
