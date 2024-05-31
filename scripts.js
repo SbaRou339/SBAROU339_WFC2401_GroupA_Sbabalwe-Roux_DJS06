@@ -15,6 +15,14 @@ const products = [
 ]
 
 // ForEach Basics
+names.forEach((name) => {
+  console.log(`${name}`);
+});
+
+provinces.forEach((province) => {
+  console.log(`${province}`);
+});
+
 names.forEach((name, index) => {
   console.log(`${name} (${provinces[index]})`);
 });
@@ -34,6 +42,7 @@ console.log(sortedProvinces);
 // Filtering basics
 const filteredProvinces = provinces.filter(province => !province.includes('Cape'));
 console.log(filteredProvinces.length);
+console.log(filteredProvinces.join(', '));
 
 // Finding 'S'
 const containsS = names.map(name => name.includes('S') || name.includes('s'));
@@ -57,7 +66,7 @@ console.log(products.filter(product => product.product.length <= 5));
 // Price Manipulation
 console.log(
   products
-    .filter(product => product.price.trim() !== '')
+    .filter(product => String(product.price).trim() !== '')
     .map(product => ({ ...product, price: Number(product.price) }))
     .reduce((total, product) => total + product.price, 0)
 );
@@ -67,15 +76,19 @@ console.log(products.reduce((acc, product) => acc + product.product + ' ', '').t
 
 // Find Extremes in Prices
 console.log(
-  products
-    .filter(product => product.price.trim() !== '')
-    .map(product => Number(product.price))
-    .reduce((acc, price) => {
-      if (price > acc.highest) acc.highest = price;
-      if (price < acc.lowest) acc.lowest = price;
-      return acc;
-    }, { highest: -Infinity, lowest: Infinity })
-    |> ({ highest, lowest }) => `Highest: ${highest}. Lowest: ${lowest}.`
+  (({ highest, lowest }) => `Highest: ${highest}. Lowest: ${lowest}.`)(
+    products
+      .filter(product => String(product.price).trim() !== '')
+      .map(product => Number(product.price))
+      .reduce(
+        (acc, price) => {
+          if (price > acc.highest) acc.highest = price;
+          if (price < acc.lowest) acc.lowest = price;
+          return acc;
+        },
+        { highest: -Infinity, lowest: Infinity }
+      )
+  )
 );
 
 
